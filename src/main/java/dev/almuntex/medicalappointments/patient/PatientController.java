@@ -4,13 +4,7 @@ import dev.almuntex.medicalappointments.appointment.AppointmentDto;
 import dev.almuntex.medicalappointments.appointment.AppointmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -41,7 +35,7 @@ public class PatientController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> registerPatient(PatientDto patientDto) {
+    public ResponseEntity<Void> registerPatient(@RequestBody PatientDto patientDto) {
         Long patientId = patientService.registerPatient(patientDto);
 
         URI location = ServletUriComponentsBuilder
