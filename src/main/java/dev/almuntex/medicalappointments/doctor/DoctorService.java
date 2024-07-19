@@ -1,5 +1,6 @@
 package dev.almuntex.medicalappointments.doctor;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,9 @@ public class DoctorService {
     }
 
     public DoctorDto getDoctorById(Long id) {
-        Doctor doctor = doctorRepository.findById(id).orElseThrow();
+        Doctor doctor = doctorRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Doctor with id " + id + " not found")
+        );
         return modelMapper.map(doctor, DoctorDto.class);
     }
 
@@ -33,7 +36,6 @@ public class DoctorService {
     }
 
     public void deleteDoctor(Long id) {
-        Doctor doctor = doctorRepository.findById(id).orElseThrow();
-        doctorRepository.delete(doctor);
+        doctorRepository.deleteById(id);
     }
 }
