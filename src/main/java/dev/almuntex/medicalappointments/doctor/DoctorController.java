@@ -2,6 +2,7 @@ package dev.almuntex.medicalappointments.doctor;
 
 import dev.almuntex.medicalappointments.appointment.AppointmentDto;
 import dev.almuntex.medicalappointments.appointment.AppointmentService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class DoctorController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> registerDoctor(@RequestBody DoctorDto doctorDto) {
+    public ResponseEntity<Void> registerDoctor(@RequestBody @Valid DoctorDto doctorDto) {
         Long doctorId = doctorService.registerDoctor(doctorDto);
 
         URI location = ServletUriComponentsBuilder
